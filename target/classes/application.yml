@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/placeoffers
+    username: postgres
+    password: 123Mudar
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      leak-detection-threshold: 60000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8080
+
+minio:
+  endpoint: http://localhost:9000
+  access-key: 0nJ3WKk95xWM0ymEd239
+  secret-key: f4QPEMz9EeEfuWsEaVhiRwryeYuPDFzoahlQiQMw
+  bucket: place-offers-images
+  region: us-east-1
