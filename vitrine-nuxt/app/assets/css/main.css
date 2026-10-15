@@ -1,0 +1,18 @@
+/* app/assets/css/main.css — Entrada de estilo do design system da vitrine.
+   Importa Tailwind + Nuxt UI e define os tokens @theme (fonte Inter via stack de sistema,
+   radius 0.625rem, container 72rem). Restaura cursor pointer em botões (Tailwind v4). */
+
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --ui-radius: 0.625rem;
+  --ui-container: 72rem;
+}
+
+/* Tailwind v4 define cursor: default em button; restaurar o ponteiro em controles ativos. */
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}

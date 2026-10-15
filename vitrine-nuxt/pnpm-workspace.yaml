@@ -1,0 +1,9 @@
+allowBuilds:
+  esbuild: set this to true or false
+  vue-demi: set this to true or false
+# pnpm-workspace.yaml — Config do pnpm 12 para a vitrine (projeto único, não é monorepo real).
+# Autoriza a execução dos scripts de build nativos necessários (esbuild, vue-demi),
+# evitando o aviso ERR_PNPM_IGNORED_BUILDS sem liberar scripts de pacotes arbitrários.
+onlyBuiltDependencies:
+  - esbuild
+  - vue-demi

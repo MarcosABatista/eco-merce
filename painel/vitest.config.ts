@@ -1,0 +1,28 @@
+// vitest.config.ts — Config de testes do painel com dois projetos Vitest.
+// `unit` roda em ambiente node (helpers puros/schemas isomórficos); `nuxt` roda no ambiente
+// Nuxt via @nuxt/test-utils (componentes/BFF). Separar os ambientes evita carregar o runtime
+// Nuxt em testes puros. Rodar com: pnpm test (vitest run --reporter=dot).
+
+import { defineConfig } from 'vitest/config'
+import { defineVitestProject } from '@nuxt/test-utils/config'
+
+export default defineConfig({
+  test: {
+    projects: [
+      {
+        test: {
+          name: 'unit',
+          environment: 'node',
+          include: ['test/unit/**/*.{test,spec}.ts', 'shared/**/*.{test,spec}.ts'],
+        },
+      },
+      await defineVitestProject({
+        test: {
+          name: 'nuxt',
+          environment: 'nuxt',
+          include: ['test/nuxt/**/*.{test,spec}.ts'],
+        },
+      }),
+    ],
+  },
+})

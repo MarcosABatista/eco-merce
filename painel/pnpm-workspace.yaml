@@ -1,0 +1,6 @@
+# pnpm-workspace.yaml — Config do pnpm 12 para o painel (projeto único, não é monorepo real).
+# Autoriza a execução dos scripts de build nativos necessários (esbuild, vue-demi),
+# evitando o aviso ERR_PNPM_IGNORED_BUILDS sem liberar scripts de pacotes arbitrários.
+onlyBuiltDependencies:
+  - esbuild
+  - vue-demi
