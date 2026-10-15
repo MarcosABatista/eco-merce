@@ -1,1 +1,0 @@
-import{q as s}from"./index-BxOh1Ngf.js";const o={async getById(a){const{data:t}=await s.get(`/usuarios/${a}`);return t},async create(a){const{data:t}=await s.post("/usuarios",a);return t},async update(a,t){const{data:r}=await s.put(`/usuarios/${a}`,t);return r}};export{o as u};
