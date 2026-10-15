@@ -29,3 +29,26 @@ export const usuarioSchema = z.object({
 })
 
 export type EntradaUsuario = z.infer<typeof usuarioSchema>
+
+// Schema de EDIÇÃO de perfil (RF-PAI-7): campos opcionais (edição parcial); senha em branco é
+// omitida pelo cliente (mantém a atual). Valida formato quando presente. Carrega _token (CSRF).
+export const atualizacaoUsuarioSchema = z.object({
+  cpfCnpj: z.string().trim()
+    .regex(/^(?:\d{11}|\d{14})$/, 'CPF/CNPJ deve ter 11 (CPF) ou 14 (CNPJ) dígitos.')
+    .optional(),
+  nome: z.string().trim()
+    .min(3, 'Nome deve ter no mínimo 3 caracteres.')
+    .max(150, 'Nome deve ter no máximo 150 caracteres.')
+    .optional(),
+  email: z.email({ error: 'E-mail inválido.' }).max(255, 'E-mail muito longo.').optional(),
+  telefone: z.string().trim().max(20, 'Telefone deve ter no máximo 20 caracteres.').nullable().optional(),
+  nomeLoja: z.string().trim().max(150, 'Nome da loja muito longo.').nullable().optional(),
+  senha: z.string()
+    .min(8, 'Senha deve ter no mínimo 8 caracteres.')
+    .max(100, 'Senha deve ter no máximo 100 caracteres.')
+    .optional(),
+  imagemLoja: z.string().trim().max(500, 'URL da imagem muito longa.').nullable().optional(),
+  _token: tokenCsrf,
+})
+
+export type EntradaAtualizacaoUsuario = z.infer<typeof atualizacaoUsuarioSchema>

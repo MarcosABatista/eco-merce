@@ -44,3 +44,14 @@ export const produtoSchema = z.object({
 )
 
 export type EntradaProduto = z.infer<typeof produtoSchema>
+
+// Schema de EDIÇÃO: os mesmos campos do produto + `ativo` (RF-PAI-5). O refinamento cruzado
+// precoDesconto < preco é reaplicado (o .refine do produtoSchema não é herdado por extend).
+export const atualizacaoProdutoSchema = produtoSchema.safeExtend({
+  ativo: z.boolean().optional(),
+}).refine(
+  dados => dados.precoDesconto == null || dados.precoDesconto < dados.preco,
+  { error: 'Desconto deve ser menor que o preço.', path: ['precoDesconto'] },
+)
+
+export type EntradaAtualizacaoProduto = z.infer<typeof atualizacaoProdutoSchema>

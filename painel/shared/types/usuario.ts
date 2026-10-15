@@ -25,5 +25,6 @@ export interface SessaoUsuario {
   email: string
   nomeLoja: string | null
   admin: boolean
+  ativo: boolean
   imagemLoja: string | null
 }
