@@ -33,6 +33,9 @@ importers:
       '@golar/vue':
         specifier: ^0.1.10
         version: 0.1.10
+      '@iconify-json/lucide':
+        specifier: ^1.2.144
+        version: 1.2.144
       '@nuxt/test-utils':
         specifier: ^4.3.3
         version: 4.3.3(719171c8d6e0e11b612978a95b4e8083)
@@ -608,6 +611,9 @@ packages:
     engines: {node: '>=22.12.0'}
     cpu: [x64]
     os: [win32]
+
+  '@iconify-json/lucide@1.2.144':
+    resolution: {integrity: sha512-b1+e91RGPd4lLck6nTXeoQFiu8z/G3pXNl/tbsqfleTSzDdI9hUzKYQSGiA6T86NmaI0FtrCDM9MjMhoCwtTMg==}
 
   '@iconify/collections@1.0.750':
     resolution: {integrity: sha512-dsjsQLm/rHsAxxMg0AFHqqCBLoYPJhqclRmB0qzlfHG2ahnipentuPW/auVwIDtvHPL9lAYTDZ9HPRFS9wkgQg==}
@@ -5247,6 +5253,10 @@ snapshots:
 
   '@golar/win32-x64@0.1.10':
     optional: true
+
+  '@iconify-json/lucide@1.2.144':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify/collections@1.0.750':
     dependencies:
