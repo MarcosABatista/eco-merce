@@ -7,7 +7,7 @@
 import { reactive, ref, watchEffect } from 'vue'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { atualizacaoUsuarioSchema } from '#shared/schemas/usuario'
-import type { Usuario } from '#shared/types/usuario'
+import type { Usuario, ValoresPerfil } from '#shared/types/usuario'
 
 const props = defineProps<{
   // Usuário atual (carregado do BFF) a editar.
@@ -19,18 +19,9 @@ const props = defineProps<{
 const emit = defineEmits<{
   // Dados validados prontos para atualizar (sem _token; a página injeta o CSRF). Senha em branco
   // é omitida (null) para o BFF manter a atual.
+  // ValoresPerfil é definido em #shared/types/usuario (export não é permitido em <script setup>).
   enviar: [valores: ValoresPerfil]
 }>()
-
-// Dados emitidos (campos de edição; senha opcional). urlImagem reflete o upload imediato.
-export interface ValoresPerfil {
-  nome: string
-  email: string
-  telefone: string | null
-  nomeLoja: string | null
-  senha?: string
-  imagemLoja: string | null
-}
 
 const token = useTokenCsrf()
 const formRef = ref()
@@ -118,7 +109,7 @@ defineExpose({ aplicarErrosDeCampo })
     </UFormField>
 
     <UFormField label="Imagem da loja" name="imagemLoja" hint="opcional" class="sm:col-span-2">
-      <UploadImagem
+      <PainelUploadImagem
         :user-id="props.usuario.id"
         :url-atual="estado.imagemLoja"
         rotulo="Imagem da loja"

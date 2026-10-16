@@ -30,3 +30,16 @@ export interface PageResponse<T> {
   page: number
   size: number
 }
+
+// Valores validados emitidos pelo FormularioProduto (sem o _token CSRF, que o pai injeta no
+// $fetch ao chamar o BFF). `ativo` só é usado na edição. Vive aqui (e não no <script setup>, que
+// não permite `export`) para ser importável tanto pelo componente quanto pelas páginas.
+export interface ValoresProduto {
+  nome: string
+  descricao: string | null
+  preco: number
+  precoDesconto: number | null
+  categoria: Categoria
+  urlImagem: string | null
+  ativo?: boolean
+}

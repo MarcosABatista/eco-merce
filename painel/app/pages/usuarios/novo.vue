@@ -5,8 +5,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { ValoresUsuario } from '~/components/painel/FormularioUsuario.vue'
-import type { Usuario } from '#shared/types/usuario'
+import type { Usuario, ValoresUsuario } from '#shared/types/usuario'
 
 definePageMeta({ layout: 'painel' })
 
@@ -71,7 +70,7 @@ async function criar(valores: ValoresUsuario) {
       </h1>
     </div>
 
-    <FormularioUsuario
+    <PainelFormularioUsuario
       ref="formRef"
       v-model:arquivo-loja="arquivoLoja"
       :enviando="enviando"

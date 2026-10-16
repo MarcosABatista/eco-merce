@@ -5,8 +5,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { ValoresProduto } from '~/components/painel/FormularioProduto.vue'
-import type { Produto } from '#shared/types/produto'
+import type { Produto, ValoresProduto } from '#shared/types/produto'
 
 definePageMeta({ layout: 'painel' })
 
@@ -65,7 +64,7 @@ async function salvar(valores: ValoresProduto) {
       data-testid="produto-editar-erro"
     />
 
-    <FormularioProduto
+    <PainelFormularioProduto
       v-else-if="produto"
       ref="formRef"
       :produto="produto"

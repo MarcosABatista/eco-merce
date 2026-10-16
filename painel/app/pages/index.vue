@@ -17,8 +17,9 @@ const { data, status, error, refresh } = await useFetch<PageResponse<Produto>>('
 const produtos = computed<Produto[]>(() => data.value?.content ?? [])
 const carregando = computed(() => status.value === 'pending')
 
-// Após remover um produto, atualiza a lista a partir do BFF (reflete o soft delete).
-async function aoRemover() {
+// Após remover ou alternar o status de um produto, recarrega a lista a partir do BFF
+// (reflete o soft delete / a mudança de `ativo`).
+async function aoAtualizar() {
   await refresh()
 }
 </script>
@@ -63,6 +64,11 @@ async function aoRemover() {
       <USkeleton v-for="n in 6" :key="n" class="h-64 w-full" />
     </div>
 
-    <ListaProdutos v-else :produtos="produtos" @removido="aoRemover" />
+    <PainelListaProdutos
+      v-else
+      :produtos="produtos"
+      @removido="aoAtualizar"
+      @alterado="aoAtualizar"
+    />
   </div>
 </template>

@@ -8,7 +8,7 @@ import { computed, reactive, ref, watchEffect } from 'vue'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { produtoSchema, atualizacaoProdutoSchema } from '#shared/schemas/produto'
 import { CATEGORIAS } from '#shared/constants/categorias'
-import type { Categoria, Produto } from '#shared/types/produto'
+import type { Categoria, Produto, ValoresProduto } from '#shared/types/produto'
 
 const props = defineProps<{
   // Produto a editar; quando ausente, o formulário cria um novo.
@@ -21,19 +21,9 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   // Dados validados prontos para o pai persistir (sem o _token, que o pai injeta no $fetch).
+  // ValoresProduto é definido em #shared/types/produto (export não é permitido em <script setup>).
   enviar: [valores: ValoresProduto]
 }>()
-
-// Forma dos dados emitidos (schema sem _token; o pai acrescenta o CSRF ao chamar o BFF).
-export interface ValoresProduto {
-  nome: string
-  descricao: string | null
-  preco: number
-  precoDesconto: number | null
-  categoria: Categoria
-  urlImagem: string | null
-  ativo?: boolean
-}
 
 const ehEdicao = ref(Boolean(props.produto))
 // Schema do UForm: edição inclui `ativo`; criação usa o schema base.
@@ -154,7 +144,7 @@ defineExpose({ aplicarErrosDeCampo })
     </UFormField>
 
     <UFormField label="Imagem" name="urlImagem" hint="opcional" class="sm:col-span-2">
-      <UploadImagem
+      <PainelUploadImagem
         :user-id="userId"
         :url-atual="estado.urlImagem"
         rotulo="Imagem do produto"

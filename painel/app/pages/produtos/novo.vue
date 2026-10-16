@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { ValoresProduto } from '~/components/painel/FormularioProduto.vue'
+import type { ValoresProduto } from '#shared/types/produto'
 
 definePageMeta({ layout: 'painel' })
 
@@ -47,7 +47,7 @@ async function criar(valores: ValoresProduto) {
       </h1>
     </div>
 
-    <FormularioProduto
+    <PainelFormularioProduto
       ref="formRef"
       :enviando="enviando"
       rotulo-envio="Cadastrar produto"

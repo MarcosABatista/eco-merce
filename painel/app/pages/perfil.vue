@@ -5,8 +5,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { ValoresPerfil } from '~/components/painel/FormularioPerfil.vue'
-import type { Usuario } from '#shared/types/usuario'
+import type { Usuario, ValoresPerfil } from '#shared/types/usuario'
 
 definePageMeta({ layout: 'painel' })
 
@@ -65,7 +64,7 @@ async function salvar(valores: ValoresPerfil) {
       data-testid="perfil-erro"
     />
 
-    <FormularioPerfil
+    <PainelFormularioPerfil
       v-else-if="usuario"
       ref="formRef"
       :usuario="usuario"

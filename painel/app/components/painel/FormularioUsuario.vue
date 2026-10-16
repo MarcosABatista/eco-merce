@@ -7,6 +7,7 @@
 import { reactive, ref, watchEffect } from 'vue'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { usuarioSchema } from '#shared/schemas/usuario'
+import type { ValoresUsuario } from '#shared/types/usuario'
 
 const props = defineProps<{
   // Indica envio em andamento (desabilita o botão).
@@ -15,20 +16,9 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   // Dados validados prontos para criar o usuário (sem _token; a página injeta o CSRF).
+  // ValoresUsuario é definido em #shared/types/usuario (export não é permitido em <script setup>).
   enviar: [valores: ValoresUsuario]
 }>()
-
-// Dados emitidos (schema sem _token; a página acrescenta o CSRF ao chamar o BFF).
-export interface ValoresUsuario {
-  cpfCnpj: string
-  nome: string
-  email: string
-  telefone: string | null
-  nomeLoja: string | null
-  senha: string
-  ativo: boolean
-  admin: boolean
-}
 
 const token = useTokenCsrf()
 const formRef = ref()
@@ -122,7 +112,7 @@ defineExpose({ aplicarErrosDeCampo })
     </UFormField>
 
     <UFormField label="Imagem da loja" name="imagemLoja" hint="opcional" class="sm:col-span-2">
-      <UploadImagem
+      <PainelUploadImagem
         v-model="arquivoLoja"
         :user-id="null"
         rotulo="Imagem da loja"

@@ -1,7 +1,7 @@
 <!-- app/components/painel/CartaoProdutoAdmin.vue — Cartão de produto na lista "Meus Produtos". -->
 <!-- Imagem via proxy /api/imagens/..., preço com desconto riscado, badge "Inativo" quando -->
-<!-- ativo=false, e ações Editar (navega) e Deletar (emite para a lista abrir o UModal de -->
-<!-- confirmação). Sem lógica de remoção aqui — só sinaliza a intenção (design §6/RF-PAI-3). -->
+<!-- ativo=false, e ações: alternar ativo/inativo (USwitch), Editar (navega) e Deletar (emite para -->
+<!-- a lista abrir o UModal). Sem lógica de escrita aqui — só sinaliza a intenção (design §6/RF-PAI-3). -->
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
@@ -9,13 +9,17 @@ import { formatarPreco } from '~/utils/formatadores'
 import { proxyImagem } from '~/utils/imagem'
 import type { Produto } from '#shared/types/produto'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   produto: Produto
-}>()
+  // Indica envio em andamento no toggle de status (a lista faz o PUT e repassa este estado).
+  alternando?: boolean
+}>(), { alternando: false })
 
 const emit = defineEmits<{
   // Pede à lista para confirmar e remover este produto (abre o UModal).
   deletar: [produto: Produto]
+  // Pede à lista para alternar o status ativo/inativo deste produto (PUT com CSRF).
+  alternarAtivo: [produto: Produto]
 }>()
 
 // URL de exibição via proxy local (ou null -> placeholder).
@@ -75,6 +79,23 @@ const imagemFalhou = ref(false)
       <p v-else class="text-lg font-bold text-highlighted" data-testid="cartao-admin-preco">
         {{ formatarPreco(props.produto.preco) }}
       </p>
+    </div>
+
+    <!-- Ativar/desativar: alterna a visibilidade do produto na vitrine (PUT ativo pela lista). -->
+    <div
+      class="flex items-center justify-between gap-2 border-t border-default pt-3"
+      :data-testid="`cartao-admin-status-${props.produto.id}`"
+    >
+      <span class="text-xs text-muted">
+        {{ props.produto.ativo ? 'Ativo na vitrine' : 'Oculto da vitrine' }}
+      </span>
+      <USwitch
+        :model-value="props.produto.ativo"
+        :loading="props.alternando"
+        :aria-label="props.produto.ativo ? 'Desativar produto' : 'Ativar produto'"
+        :data-testid="`cartao-admin-alternar-${props.produto.id}`"
+        @update:model-value="emit('alternarAtivo', props.produto)"
+      />
     </div>
 
     <div class="flex items-center gap-2">

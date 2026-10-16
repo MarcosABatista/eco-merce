@@ -35,6 +35,13 @@ export async function chamarJava<T>(
   opcoes: OpcoesChamadaJava = {},
 ): Promise<T> {
   const { apiBaseUrl } = useRuntimeConfig(event)
+  // Guarda de configuração: sem apiBaseUrl (NUXT_API_BASE_URL ausente) o $fetch cairia em URL
+  // relativa e bateria no PRÓPRIO Nuxt — o POST "parece" dar certo (302->/login) mas nada chega
+  // ao Java/banco. Falhamos alto aqui para a má configuração nunca se disfarçar de sucesso.
+  if (!apiBaseUrl) {
+    console.error('[BFF] NUXT_API_BASE_URL não configurado — chamada ao Java abortada', { caminho })
+    throw createError({ statusCode: 500, statusMessage: 'Backend não configurado (NUXT_API_BASE_URL ausente)' })
+  }
   // Tipagem larga do $fetch: a URL é um host externo (Java), não uma rota interna tipada do
   // Nitro — a inferência de rota tipada estoura "excessive stack depth" com string dinâmica.
   const buscar = $fetch as unknown as (url: string, opts: Record<string, unknown>) => Promise<T>
