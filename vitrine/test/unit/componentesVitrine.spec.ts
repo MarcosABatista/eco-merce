@@ -89,15 +89,16 @@ describe('home / grade — erro não-fatal da grade (§9/MEDIUM-6)', () => {
 
   it('EstadoErro é inline no slot da grade; banner e categorias ficam fora do ramo da grade', () => {
     // Banner e categorias são irmãos da seção de ofertas (não dentro do ramo condicional da grade).
-    const posBanner = home.indexOf('<BannerPromocional')
-    const posCategorias = home.indexOf('<CategoriasPopulares')
+    // Componentes são auto-importados com prefixo de caminho (Vitrine*) — nome registrado real.
+    const posBanner = home.indexOf('<VitrineBannerPromocional')
+    const posCategorias = home.indexOf('<VitrineCategoriasPopulares')
     const posSecaoOfertas = home.indexOf('secao-ofertas')
     expect(posBanner).toBeGreaterThanOrEqual(0)
     expect(posCategorias).toBeGreaterThanOrEqual(0)
     // Banner e categorias aparecem ANTES da seção de ofertas (irmãos, não derrubados pelo erro).
     expect(posBanner).toBeLessThan(posSecaoOfertas)
     expect(posCategorias).toBeLessThan(posSecaoOfertas)
-    // EstadoErro é renderizado no lugar da grade quando há erro.
-    expect(home).toMatch(/<EstadoErro[\s\S]*v-else-if="temErro"|v-else-if="temErro"[\s\S]*EstadoErro/)
+    // VitrineEstadoErro é renderizado no lugar da grade quando há erro.
+    expect(home).toMatch(/<VitrineEstadoErro[\s\S]*v-else-if="temErro"|v-else-if="temErro"[\s\S]*VitrineEstadoErro/)
   })
 })

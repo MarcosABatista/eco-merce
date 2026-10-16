@@ -61,7 +61,7 @@ function filtrarPorCategoria() {
     </div>
 
     <!-- Contato direto com a loja. -->
-    <BotaoWhatsapp
+    <VitrineBotaoWhatsapp
       :telefone="props.produto.telefone"
       :nome-produto="props.produto.nome"
       rotulo="Chamar no WhatsApp"

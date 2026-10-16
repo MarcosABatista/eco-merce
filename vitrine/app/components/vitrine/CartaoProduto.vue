@@ -20,7 +20,7 @@ const imagemFalhou = ref(false)
 
 <template>
   <UCard
-    class="group flex h-full cursor-pointer flex-col transition-shadow hover:shadow-lg"
+    class="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:ring-2 hover:ring-primary/30"
     :ui="{ body: 'flex flex-1 flex-col gap-2 p-3 sm:p-4' }"
     :data-testid="`cartao-produto-${props.produto.id}`"
     @click="navigateTo(`/produto/${props.produto.id}`)"
@@ -112,7 +112,7 @@ const imagemFalhou = ref(false)
         :data-testid="`cartao-ver-oferta-${props.produto.id}`"
         @click.stop="navigateTo(`/produto/${props.produto.id}`)"
       />
-      <BotaoWhatsapp
+      <VitrineBotaoWhatsapp
         compacto
         :telefone="props.produto.telefone"
         :nome-produto="props.produto.nome"

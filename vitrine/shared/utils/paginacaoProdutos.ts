@@ -15,11 +15,19 @@ export function anexarProdutos(atuais: Produto[], novos: Produto[]): Produto[] {
   return [...atuais, ...novos]
 }
 
-// Filtra por nome, case-insensitive, sobre o conjunto já carregado; termo vazio devolve tudo.
-export function filtrarPorNome(produtos: Produto[], termo: string): Produto[] {
+// Filtra por nome do PRODUTO ou da LOJA, case-insensitive, sobre o conjunto já carregado; termo
+// vazio devolve tudo (RF-VIT-7, estendido para buscar também pela loja — estilo marketplace).
+export function filtrarProdutos(produtos: Produto[], termo: string): Produto[] {
   const alvo = termo.trim().toLowerCase()
   if (!alvo) {
     return produtos
   }
-  return produtos.filter(p => p.nome.toLowerCase().includes(alvo))
+  return produtos.filter((p) => {
+    const emNome = p.nome.toLowerCase().includes(alvo)
+    const emLoja = (p.nomeLoja ?? '').toLowerCase().includes(alvo)
+    return emNome || emLoja
+  })
 }
+
+// Alias retrocompatível — mantém o nome antigo apontando para o filtro estendido (nome + loja).
+export const filtrarPorNome = filtrarProdutos

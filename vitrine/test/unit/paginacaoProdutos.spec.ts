@@ -1,18 +1,19 @@
 // test/unit/paginacaoProdutos.spec.ts — Property/unit tests das invariantes de paginação/busca.
 // Trava: temMaisPaginas <=> paginaAtual < totalPaginas-1; anexarProdutos acumula sem remover;
-// filtrarPorNome é case-insensitive e termo vazio devolve tudo. Lógica pura isomórfica. Ambiente node.
+// filtrarProdutos é case-insensitive, casa nome do produto OU da loja e termo vazio devolve tudo.
+// Lógica pura isomórfica. Ambiente node.
 
 import { describe, expect, it } from 'vitest'
 import fc from 'fast-check'
 import {
   anexarProdutos,
-  filtrarPorNome,
+  filtrarProdutos,
   temMaisPaginas,
 } from '../../shared/utils/paginacaoProdutos'
 import type { Produto } from '../../shared/types/produto'
 
-// Fábrica mínima de Produto para os testes (só os campos exercitados importam).
-function fazerProduto(id: number, nome: string): Produto {
+// Fábrica mínima de Produto para os testes (só os campos exercitados importam). nomeLoja opcional.
+function fazerProduto(id: number, nome: string, nomeLoja: string | null = null): Produto {
   return {
     id,
     nome,
@@ -23,7 +24,7 @@ function fazerProduto(id: number, nome: string): Produto {
     categoria: 'VESTUARIO',
     urlImagem: null,
     ativo: true,
-    nomeLoja: null,
+    nomeLoja,
     telefone: null,
     createdAt: '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-01T00:00:00Z',
@@ -71,35 +72,42 @@ describe('anexarProdutos', () => {
   })
 })
 
-describe('filtrarPorNome', () => {
+describe('filtrarProdutos', () => {
   const base = [
-    fazerProduto(1, 'Tênis de Corrida'),
-    fazerProduto(2, 'Camiseta Branca'),
-    fazerProduto(3, 'TÊNIS Casual'),
+    fazerProduto(1, 'Tênis de Corrida', 'Loja do Pé'),
+    fazerProduto(2, 'Camiseta Branca', 'Moda Center'),
+    fazerProduto(3, 'TÊNIS Casual', null),
   ]
 
   it('termo vazio (ou só espaços) devolve o conjunto inteiro', () => {
-    expect(filtrarPorNome(base, '')).toEqual(base)
-    expect(filtrarPorNome(base, '   ')).toEqual(base)
+    expect(filtrarProdutos(base, '')).toEqual(base)
+    expect(filtrarProdutos(base, '   ')).toEqual(base)
   })
 
-  it('busca é case-insensitive', () => {
-    const r = filtrarPorNome(base, 'tênis')
+  it('busca por nome do produto é case-insensitive', () => {
+    const r = filtrarProdutos(base, 'tênis')
     expect(r.map(p => p.id)).toEqual([1, 3])
   })
 
-  it('nenhum match devolve lista vazia', () => {
-    expect(filtrarPorNome(base, 'inexistente')).toEqual([])
+  it('busca também casa pelo nome da loja (case-insensitive)', () => {
+    const r = filtrarProdutos(base, 'moda')
+    expect(r.map(p => p.id)).toEqual([2])
   })
 
-  it('property: todo item retornado contém o termo (lowercase) no nome', () => {
+  it('nenhum match (nem nome nem loja) devolve lista vazia', () => {
+    expect(filtrarProdutos(base, 'inexistente')).toEqual([])
+  })
+
+  it('property: todo item retornado contém o termo (lowercase) no nome OU na loja', () => {
     fc.assert(
       fc.property(fc.string({ minLength: 1, maxLength: 5 }), (termo) => {
-        const r = filtrarPorNome(base, termo)
+        const r = filtrarProdutos(base, termo)
         const alvo = termo.trim().toLowerCase()
         if (alvo) {
           for (const p of r) {
-            expect(p.nome.toLowerCase().includes(alvo)).toBe(true)
+            const emNome = p.nome.toLowerCase().includes(alvo)
+            const emLoja = (p.nomeLoja ?? '').toLowerCase().includes(alvo)
+            expect(emNome || emLoja).toBe(true)
           }
         }
       }),

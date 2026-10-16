@@ -17,7 +17,7 @@ defineProps<{
     class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
     data-testid="grade-produtos"
   >
-    <CartaoProduto
+    <VitrineCartaoProduto
       v-for="produto in produtos"
       :key="produto.id"
       :produto="produto"

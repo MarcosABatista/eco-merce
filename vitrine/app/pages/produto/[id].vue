@@ -80,7 +80,7 @@ async function tentarNovamente() {
     </div>
 
     <!-- Erro recuperável (timeout/5xx): tentar novamente (retries ilimitados). -->
-    <EstadoErro
+    <VitrineEstadoErro
       v-else-if="erroRecuperavel"
       :titulo="VITRINE_MSG_ERRO_DETALHE"
       :carregando="carregando"
@@ -89,22 +89,22 @@ async function tentarNovamente() {
 
     <!-- Detalhe carregado. -->
     <div v-else-if="produto" class="flex flex-col gap-6" data-testid="detalhe-produto">
-      <TrilhaNavegacao :categoria="produto.categoria" :nome="produto.nome" />
+      <VitrineTrilhaNavegacao :categoria="produto.categoria" :nome="produto.nome" />
 
       <div class="grid gap-6 lg:grid-cols-5">
         <!-- Galeria ~60% no desktop. -->
         <div class="lg:col-span-3">
-          <GaleriaImagem :url="produto.urlImagem" :nome="produto.nome" />
+          <VitrineGaleriaImagem :url="produto.urlImagem" :nome="produto.nome" />
         </div>
         <!-- Painel de informações ~40% no desktop. -->
         <div class="lg:col-span-2">
-          <PainelInformacoes :produto="produto" />
+          <VitrinePainelInformacoes :produto="produto" />
         </div>
       </div>
 
       <USeparator />
-      <SecaoDescricao :descricao="produto.descricao" />
-      <SecaoVendedor :nome-loja="produto.nomeLoja" :telefone="produto.telefone" />
+      <VitrineSecaoDescricao :descricao="produto.descricao" />
+      <VitrineSecaoVendedor :nome-loja="produto.nomeLoja" :telefone="produto.telefone" />
     </div>
   </UContainer>
 </template>

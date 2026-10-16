@@ -6,7 +6,7 @@
 import { computed } from 'vue'
 import {
   anexarProdutos,
-  filtrarPorNome,
+  filtrarProdutos,
   temMaisPaginas as calcularTemMaisPaginas,
 } from '#shared/utils/paginacaoProdutos'
 import type { Categoria, PageResponse, Produto } from '#shared/types/produto'
@@ -23,9 +23,10 @@ export function useProdutos() {
   const termoBusca = useState<string>('vitrine-produtos-busca', () => '')
   const carregandoMais = useState<boolean>('vitrine-produtos-carregando-mais', () => false)
 
-  // Produtos exibidos: só ativos, filtrados por nome (case-insensitive) sobre o já carregado.
+  // Produtos exibidos: só ativos, filtrados por nome do produto OU da loja (case-insensitive)
+  // sobre o já carregado.
   const produtosFiltrados = computed<Produto[]>(() =>
-    filtrarPorNome(produtos.value.filter(p => p.ativo), termoBusca.value),
+    filtrarProdutos(produtos.value.filter(p => p.ativo), termoBusca.value),
   )
 
   // Há mais páginas no servidor para "Carregar mais" (RF-VIT-6).

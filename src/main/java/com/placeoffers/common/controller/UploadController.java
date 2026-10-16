@@ -16,8 +16,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UploadController {
 
-    private final StorageService storageService;
-    private final UsuarioRepository usuarioRepository;
+    private final StorageService storageService = null;
+    private final UsuarioRepository usuarioRepository = null;
 
     /**
      * Upload de arquivo para o diretório do usuário no bucket.

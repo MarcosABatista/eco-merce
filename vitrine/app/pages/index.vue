@@ -68,6 +68,14 @@ async function aoAlternarCategoria(categoria: Categoria) {
   await refresh()
 }
 
+// Remove o filtro de categoria ("Todas") e recarrega a primeira página.
+async function aoLimparCategoria() {
+  if (categoriaAtiva.value === null) return
+  categoriaAtiva.value = null
+  reiniciar()
+  await refresh()
+}
+
 // Retry da grade após erro.
 async function tentarNovamente() {
   await refresh()
@@ -76,24 +84,40 @@ async function tentarNovamente() {
 
 <template>
   <div>
-    <BannerPromocional />
+    <VitrineBannerPromocional />
 
     <UContainer class="flex flex-col gap-8 py-6">
-      <CategoriasPopulares
-        :ativa="categoriaAtiva"
-        @alternar="aoAlternarCategoria"
-      />
+      <!-- Categorias em cards circulares (estilo marketplace); "Todas" limpa o filtro. -->
+      <div class="rounded-2xl border border-default bg-default p-4 shadow-sm sm:p-6">
+        <VitrineCategoriasPopulares
+          :ativa="categoriaAtiva"
+          @alternar="aoAlternarCategoria"
+          @limpar="aoLimparCategoria"
+        />
+      </div>
 
       <section aria-labelledby="titulo-ofertas" data-testid="secao-ofertas">
-        <h2 id="titulo-ofertas" class="mb-4 text-xl font-bold text-highlighted">
-          {{ VITRINE_TITULO_OFERTAS }}
-        </h2>
+        <div class="mb-4 flex items-center gap-2">
+          <span class="inline-flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <UIcon name="i-lucide-flame" class="size-5" aria-hidden="true" />
+          </span>
+          <h2 id="titulo-ofertas" class="text-xl font-bold text-highlighted sm:text-2xl">
+            {{ VITRINE_TITULO_OFERTAS }}
+          </h2>
+          <span
+            v-if="!carregando && !temErro && produtosFiltrados.length > 0"
+            class="ml-auto text-sm text-muted"
+            data-testid="ofertas-contagem"
+          >
+            {{ produtosFiltrados.length }} {{ produtosFiltrados.length === 1 ? 'produto' : 'produtos' }}
+          </span>
+        </div>
 
         <!-- Carregando: esqueletos (>=6). -->
-        <EsqueletosCarregamento v-if="carregando" />
+        <VitrineEsqueletosCarregamento v-if="carregando" />
 
         <!-- Erro da grade: inline, recuperável; cabeçalho/categorias permanecem montados. -->
-        <EstadoErro
+        <VitrineEstadoErro
           v-else-if="temErro"
           :titulo="VITRINE_MSG_ERRO_GRADE"
           :carregando="carregando"
@@ -101,21 +125,21 @@ async function tentarNovamente() {
         />
 
         <!-- Vazio de busca (há itens, mas o filtro client-side não casou). -->
-        <EstadoVazio
+        <VitrineEstadoVazio
           v-else-if="buscaSemResultado"
           :titulo="VITRINE_MSG_BUSCA_VAZIA"
           :dica="temMaisPaginas ? VITRINE_MSG_BUSCA_VAZIA_DICA : undefined"
         />
 
         <!-- Vazio de catálogo (nenhum produto). -->
-        <EstadoVazio
+        <VitrineEstadoVazio
           v-else-if="catalogoVazio"
           :titulo="VITRINE_MSG_SEM_PRODUTOS"
         />
 
         <!-- Grade de produtos. -->
         <template v-else>
-          <GradeProdutos :produtos="produtosFiltrados" />
+          <VitrineGradeProdutos :produtos="produtosFiltrados" />
 
           <!-- Carregar mais: visível enquanto há páginas; some ao fim; desabilita durante request. -->
           <div v-if="temMaisPaginas" class="mt-6 flex justify-center">

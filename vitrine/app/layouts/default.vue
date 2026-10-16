@@ -13,7 +13,7 @@ const anoAtual = new Date().getFullYear()
 
 <template>
   <div class="flex min-h-screen flex-col bg-muted/30">
-    <CabecalhoVitrine v-model="termoBusca" />
+    <VitrineCabecalhoVitrine v-model="termoBusca" />
 
     <main class="flex-1" data-testid="vitrine-conteudo">
       <slot />
