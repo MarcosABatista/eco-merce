@@ -2,12 +2,12 @@
 
 ## Introdução
 
-Esta funcionalidade adiciona o campo de preço com desconto (`preco_desconto`) à tabela de produtos. O back-end calcula automaticamente o percentual de desconto com base no preço original e no preço com desconto informados. Ambos os front-ends (admin Place Offers e Vitrine pública) exibem o preço original riscado, o preço com desconto em destaque e um badge com o percentual de desconto.
+Esta funcionalidade adiciona o campo de preço com desconto (`preco_desconto`) à tabela de produtos. O back-end calcula automaticamente o percentual de desconto com base no preço original e no preço com desconto informados. Ambos os front-ends (admin Daqui e Vitrine pública) exibem o preço original riscado, o preço com desconto em destaque e um badge com o percentual de desconto.
 
 ## Glossário
 
 - **Sistema_Backend**: Aplicação Spring Boot responsável pela API REST, persistência e lógica de negócio
-- **Sistema_Admin**: Front-end Vue.js do projeto Place Offers utilizado para gerenciar produtos
+- **Sistema_Admin**: Front-end Vue.js do projeto Daqui utilizado para gerenciar produtos
 - **Sistema_Vitrine**: Front-end Vue.js público onde consumidores visualizam os produtos
 - **Produto**: Entidade de domínio representando um item cadastrado por um usuário
 - **Preco_Original**: Valor cheio do produto armazenado na coluna `preco` (NUMERIC(10,2))

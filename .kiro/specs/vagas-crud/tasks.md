@@ -18,7 +18,7 @@ Implementar o módulo de vagas seguindo os mesmos padrões do módulo `produto`:
 
 - [x] 2. Create Vaga entity and DTOs
   - [x] 2.1 Create Vaga entity class
-    - Create `src/main/java/com/placeoffers/vaga/model/Vaga.java`
+    - Create `src/main/java/com/daqui/vaga/model/Vaga.java`
     - Follow same pattern as Produto entity: @Entity, @Table, @Getter, @Setter, @NoArgsConstructor, @EntityListeners(AuditingEntityListener.class)
     - Fields: id, usuario (ManyToOne LAZY), cargo, descricao, ativo, createdAt, updatedAt
     - Add @Transient helper methods: getNomeUsuario() and getNomeLoja() from usuario
@@ -26,31 +26,31 @@ Implementar o módulo de vagas seguindo os mesmos padrões do módulo `produto`:
     - _Requirements: 7.1_
 
   - [x] 2.2 Create CreateVagaRequest DTO
-    - Create `src/main/java/com/placeoffers/vaga/dto/CreateVagaRequest.java`
+    - Create `src/main/java/com/daqui/vaga/dto/CreateVagaRequest.java`
     - Java record with fields: usuarioId (@NotNull), cargo (@NotBlank, @Size max=200), descricao (optional)
     - Validation messages in Portuguese following project convention
     - _Requirements: 1.1, 1.2_
 
   - [x] 2.3 Create UpdateVagaRequest DTO
-    - Create `src/main/java/com/placeoffers/vaga/dto/UpdateVagaRequest.java`
+    - Create `src/main/java/com/daqui/vaga/dto/UpdateVagaRequest.java`
     - Java record with fields: cargo (@Size max=200, nullable), descricao (nullable), ativo (nullable)
     - All fields optional to support partial updates
     - _Requirements: 2.1, 2.3_
 
   - [x] 2.4 Create VagaResponse DTO
-    - Create `src/main/java/com/placeoffers/vaga/dto/VagaResponse.java`
+    - Create `src/main/java/com/daqui/vaga/dto/VagaResponse.java`
     - Java record with fields: id, usuarioId, nomeUsuario, nomeLoja, cargo, descricao, ativo, createdAt, updatedAt
     - _Requirements: 7.1, 7.2_
 
 - [x] 3. Implement repository and service
   - [x] 3.1 Create VagaRepository
-    - Create `src/main/java/com/placeoffers/vaga/repository/VagaRepository.java`
+    - Create `src/main/java/com/daqui/vaga/repository/VagaRepository.java`
     - Extend JpaRepository<Vaga, Long>
     - Methods: findByAtivoTrue(Pageable), findByUsuarioId(Long, Pageable), findByUsuarioIdAndAtivoTrue(Long, Pageable)
     - _Requirements: 3.1, 3.3_
 
   - [x] 3.2 Create VagaService
-    - Create `src/main/java/com/placeoffers/vaga/service/VagaService.java`
+    - Create `src/main/java/com/daqui/vaga/service/VagaService.java`
     - @Service, @RequiredArgsConstructor, @Transactional(readOnly = true) at class level
     - Inject VagaRepository and UsuarioRepository
     - Implement create(): validate usuario exists and is active, map request to entity, save, return response
@@ -63,7 +63,7 @@ Implementar o módulo de vagas seguindo os mesmos padrões do módulo `produto`:
 
 - [x] 4. Implement controller
   - [x] 4.1 Create VagaController
-    - Create `src/main/java/com/placeoffers/vaga/controller/VagaController.java`
+    - Create `src/main/java/com/daqui/vaga/controller/VagaController.java`
     - @RestController, @RequestMapping("/api/v1/vagas"), @RequiredArgsConstructor
     - POST / → create (201 CREATED)
     - GET / → findAll with params: page (default 0), size (default 20), usuarioId (optional)

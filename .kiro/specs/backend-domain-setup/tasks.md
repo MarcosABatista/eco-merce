@@ -2,19 +2,19 @@
 
 ## Overview
 
-Implementação da estrutura de domínio back-end da plataforma Place Offers usando Java 21+ com Spring Boot 3.x, PostgreSQL e Flyway. O plano segue a arquitetura em camadas (Controller → Service → Repository) com organização por domínio, cobrindo as entidades Usuario e Produto, o enum Categoria, configurações de banco de dados, operações CRUD completas, tratamento de exceções e testes.
+Implementação da estrutura de domínio back-end da plataforma Daqui usando Java 21+ com Spring Boot 3.x, PostgreSQL e Flyway. O plano segue a arquitetura em camadas (Controller → Service → Repository) com organização por domínio, cobrindo as entidades Usuario e Produto, o enum Categoria, configurações de banco de dados, operações CRUD completas, tratamento de exceções e testes.
 
 ## Tasks
 
 - [x] 1. Configuração do projeto e infraestrutura base
   - [x] 1.1 Criar estrutura do projeto Maven com Spring Boot 3.x e Java 21
     - Configurar `pom.xml` com dependências: spring-boot-starter-web, spring-boot-starter-data-jpa, spring-boot-starter-validation, flyway-core, flyway-database-postgresql, postgresql driver, lombok, spring-boot-starter-test, jqwik (test scope), spring-boot-starter-security
-    - Criar classe principal `PlaceOffersApplication.java` no pacote `com.placeoffers`
+    - Criar classe principal `DaquiApplication.java` no pacote `com.daqui`
     - Criar estrutura de diretórios conforme design: config/, common/exception/, common/dto/, usuario/, produto/
     - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
   - [x] 1.2 Criar arquivo de configuração application.yml
-    - Configurar conexão PostgreSQL: jdbc:postgresql://localhost:5432/placeoffers, username postgres, password 123Mudar
+    - Configurar conexão PostgreSQL: jdbc:postgresql://localhost:5432/daqui, username postgres, password 123Mudar
     - Definir hibernate ddl-auto: validate
     - Desabilitar spring.jpa.open-in-view
     - Habilitar Flyway com locations: classpath:db/migration
@@ -37,7 +37,7 @@ Implementação da estrutura de domínio back-end da plataforma Place Offers usa
 
 - [x] 2. Modelos de domínio e enum
   - [x] 2.1 Implementar a entidade Usuario
-    - Criar classe `Usuario.java` no pacote `com.placeoffers.usuario.model`
+    - Criar classe `Usuario.java` no pacote `com.daqui.usuario.model`
     - Mapear para tabela `usuarios` com todos os campos conforme design: id, cpfCnpj, nome, email, telefone, senha, nomeLoja, ativo, admin, imagemLoja, createdAt, updatedAt
     - Usar `@GeneratedValue(strategy = GenerationType.IDENTITY)`, `@CreatedDate`, `@LastModifiedDate`, `@EntityListeners(AuditingEntityListener.class)`
     - Definir defaults: ativo=true, admin=false
@@ -45,14 +45,14 @@ Implementação da estrutura de domínio back-end da plataforma Place Offers usa
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7_
 
   - [x] 2.2 Implementar o enum Categoria
-    - Criar enum `Categoria.java` no pacote `com.placeoffers.produto.model`
+    - Criar enum `Categoria.java` no pacote `com.daqui.produto.model`
     - Definir valores: VESTUARIO, ELETRODOMESTICOS, ACESSORIOS, SUPLEMENTOS
     - Implementar método estático `fromString(String value)` com conversão case-insensitive
     - Lançar `BusinessException` com mensagem descritiva para valores inválidos
     - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
   - [x] 2.3 Implementar a entidade Produto
-    - Criar classe `Produto.java` no pacote `com.placeoffers.produto.model`
+    - Criar classe `Produto.java` no pacote `com.daqui.produto.model`
     - Mapear para tabela `produtos` com campos: id, usuario (ManyToOne LAZY), nome, descricao, preco, categoria (EnumType.STRING), urlImagem, ativo, createdAt, updatedAt
     - Implementar método `@Transient getNomeLoja()` derivando do Usuario associado
     - Definir default: ativo=true

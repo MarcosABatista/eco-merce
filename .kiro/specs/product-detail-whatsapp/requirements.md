@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Este documento especifica os requisitos para a **Página de Detalhes do Produto estilo Mercado Livre** e o **Botão de Contato via WhatsApp** no projeto Vitrine do PlaceOffers. A funcionalidade aprimora a experiência do visitante ao navegar produtos, oferecendo uma visualização detalhada rica (imagem em destaque, informações do vendedor, descrição expandida) inspirada no layout do Mercado Livre, além de um botão de contato por WhatsApp disponível tanto no Card_de_Produto na página inicial quanto na página de detalhes.
+Este documento especifica os requisitos para a **Página de Detalhes do Produto estilo Mercado Livre** e o **Botão de Contato via WhatsApp** no projeto Vitrine do daqui. A funcionalidade aprimora a experiência do visitante ao navegar produtos, oferecendo uma visualização detalhada rica (imagem em destaque, informações do vendedor, descrição expandida) inspirada no layout do Mercado Livre, além de um botão de contato por WhatsApp disponível tanto no Card_de_Produto na página inicial quanto na página de detalhes.
 
 ## Glossary
 
-- **Vitrine**: Aplicação web pública (somente leitura) que exibe produtos ativos do PlaceOffers para visitantes
+- **Vitrine**: Aplicação web pública (somente leitura) que exibe produtos ativos do daqui para visitantes
 - **Visitante**: Usuário não autenticado que acessa a Vitrine para visualizar produtos
-- **Produto**: Item cadastrado no PlaceOffers contendo nome, descrição, preço, categoria, imagem, nome da loja e telefone do vendedor
+- **Produto**: Item cadastrado no daqui contendo nome, descrição, preço, categoria, imagem, nome da loja e telefone do vendedor
 - **Card_de_Produto**: Componente visual na grade da página inicial que exibe resumo do produto
 - **Página_de_Detalhes**: Página dedicada que exibe todas as informações de um Produto em layout estilo Mercado Livre
 - **Galeria_de_Imagem**: Área principal da Página_de_Detalhes que exibe a imagem do produto em tamanho ampliado
@@ -17,7 +17,7 @@ Este documento especifica os requisitos para a **Página de Detalhes do Produto 
 - **Seção_Descrição**: Área abaixo da galeria que exibe a descrição completa do produto
 - **Botão_WhatsApp**: Botão de ação que abre uma conversa no WhatsApp Web ou app com o número de telefone do vendedor
 - **WhatsApp_Link**: URL no formato `https://wa.me/{número}?text={mensagem}` que direciona o Visitante ao WhatsApp do vendedor
-- **PlaceOffers_API**: API REST do backend PlaceOffers disponível em `/api/v1`
+- **daqui_API**: API REST do backend daqui disponível em `/api/v1`
 - **Breadcrumb**: Componente de navegação que mostra o caminho hierárquico (Início > Categoria > Produto)
 
 ## Requirements
@@ -29,7 +29,7 @@ Este documento especifica os requisitos para a **Página de Detalhes do Produto 
 #### Acceptance Criteria
 
 1. WHEN the Visitante clicks on a Card_de_Produto or on the "Ver Oferta" button in the homepage grid, THE Vitrine SHALL navigate to the Página_de_Detalhes using the route `/produto/{id}` where `{id}` is the product identifier
-2. WHEN the Visitante navigates to the Página_de_Detalhes, THE Vitrine SHALL fetch the product data from the PlaceOffers_API endpoint GET `/api/v1/produtos/{id}`
+2. WHEN the Visitante navigates to the Página_de_Detalhes, THE Vitrine SHALL fetch the product data from the daqui_API endpoint GET `/api/v1/produtos/{id}`
 3. WHILE the Vitrine is fetching the product data, THE Vitrine SHALL display a loading skeleton matching the layout structure of the Página_de_Detalhes, and SHALL display this skeleton for no longer than 30 seconds before showing a timeout error
 4. THE Página_de_Detalhes SHALL display a Breadcrumb component showing the navigation path "Início > {categoria} > {nome do produto}" where each segment except the last is a clickable link
 5. WHEN the Visitante clicks on "Início" in the Breadcrumb, THE Vitrine SHALL navigate back to the homepage
@@ -97,8 +97,8 @@ Este documento especifica os requisitos para a **Página de Detalhes do Produto 
 
 #### Acceptance Criteria
 
-1. IF the PlaceOffers_API returns HTTP 404 for the product request, THEN THE Página_de_Detalhes SHALL hide the loading indicator and display a message "Produto não encontrado" and a button labeled "Voltar para a página inicial" that navigates to the homepage
-2. IF the PlaceOffers_API returns a network error or HTTP 5xx for the product request, THEN THE Página_de_Detalhes SHALL hide the loading indicator and display a message "Não foi possível carregar o produto" and a "Tentar novamente" button that re-triggers the product fetch
+1. IF the daqui_API returns HTTP 404 for the product request, THEN THE Página_de_Detalhes SHALL hide the loading indicator and display a message "Produto não encontrado" and a button labeled "Voltar para a página inicial" that navigates to the homepage
+2. IF the daqui_API returns a network error or HTTP 5xx for the product request, THEN THE Página_de_Detalhes SHALL hide the loading indicator and display a message "Não foi possível carregar o produto" and a "Tentar novamente" button that re-triggers the product fetch
 3. IF the Visitante navigates to a product route with a non-numeric ID, THEN THE Vitrine SHALL redirect the Visitante to the homepage without displaying the Página_de_Detalhes
 4. WHILE the Página_de_Detalhes is fetching the product data, THE Página_de_Detalhes SHALL display a loading indicator and SHALL NOT display error messages or product content
 5. IF the Visitante clicks "Tentar novamente" and the retry request also fails with a network error or HTTP 5xx, THEN THE Página_de_Detalhes SHALL continue displaying the error message and the "Tentar novamente" button, allowing unlimited manual retries

@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Módulo de CRUD completo para vagas de emprego (job openings) na plataforma Place Offers. Permite que usuários publiquem, listem, editem e desativem vagas, seguindo os mesmos padrões arquiteturais e convenções do módulo de produtos existente.
+Módulo de CRUD completo para vagas de emprego (job openings) na plataforma Daqui. Permite que usuários publiquem, listem, editem e desativem vagas, seguindo os mesmos padrões arquiteturais e convenções do módulo de produtos existente.
 
 ## Glossary
 
-- **Sistema**: O backend da aplicação Place Offers (Spring Boot)
+- **Sistema**: O backend da aplicação Daqui (Spring Boot)
 - **Vaga**: Uma vaga de emprego publicada por um usuário, contendo cargo e descrição
 - **Usuario**: Entidade já existente que representa um usuário cadastrado na plataforma
 - **Soft_Delete**: Padrão de exclusão lógica onde o registro é marcado como inativo (ativo=false) ao invés de ser removido fisicamente

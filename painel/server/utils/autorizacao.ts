@@ -5,7 +5,8 @@
 
 import type { H3Event } from 'h3'
 import type { SessaoUsuario } from '#shared/types/usuario'
-import type { PageResponse, Produto } from '#shared/types/produto'
+import type { PageResponse as PageResponseProduto, Produto } from '#shared/types/produto'
+import type { PageResponse as PageResponseVaga, Vaga } from '#shared/types/vaga'
 
 // Teto de página do backend (Math.min(size, 50)) usado na paginação de verificação de dono.
 const AUTORIZACAO_TAMANHO_PAGINA = 50
@@ -38,12 +39,37 @@ export async function exigirProdutoDoDono(
   let page = 0
   let totalPages = 1 // provisório; corrigido na 1ª resposta
   do {
-    const resposta = await chamarJava<PageResponse<Produto>>(event, '/produtos', {
+    const resposta = await chamarJava<PageResponseProduto<Produto>>(event, '/produtos', {
       method: 'GET',
       query: { usuarioId: sessao.id, page, size: AUTORIZACAO_TAMANHO_PAGINA },
     })
     totalPages = resposta.totalPages
     if (resposta.content.some(p => p.id === produtoId)) return true
+    page++
+  } while (page < totalPages)
+
+  return false
+}
+
+// Confirma que a vaga pertence à sessão (ou que é admin). Admin curto-circuita sem paginar;
+// senão percorre as páginas de /vagas?usuarioId=sessao.id (limite rígido por totalPages) e
+// retorna true ao achar o id, false ao esgotar. O caller traduz false em 403.
+export async function exigirVagaDoDono(
+  event: H3Event,
+  sessao: SessaoUsuario,
+  vagaId: number,
+): Promise<boolean> {
+  if (sessao.admin) return true
+
+  let page = 0
+  let totalPages = 1 // provisório; corrigido na 1ª resposta
+  do {
+    const resposta = await chamarJava<PageResponseVaga<Vaga>>(event, '/vagas', {
+      method: 'GET',
+      query: { usuarioId: sessao.id, page, size: AUTORIZACAO_TAMANHO_PAGINA },
+    })
+    totalPages = resposta.totalPages
+    if (resposta.content.some(v => v.id === vagaId)) return true
     page++
   } while (page < totalPages)
 

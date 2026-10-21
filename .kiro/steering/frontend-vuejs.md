@@ -635,11 +635,11 @@ Usar prefixo `VITE_` para variáveis acessíveis no client-side:
 ```
 # .env.development
 VITE_API_BASE_URL=http://localhost:8080/api/v1
-VITE_APP_TITLE=Place Offers - Dev
+VITE_APP_TITLE=Daqui - Dev
 
 # .env.production
-VITE_API_BASE_URL=https://api.placeoffers.com/api/v1
-VITE_APP_TITLE=Place Offers
+VITE_API_BASE_URL=https://api.daqui.com/api/v1
+VITE_APP_TITLE=Daqui
 ```
 
 Acessar com `import.meta.env.VITE_*`.

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Este documento descreve o design técnico para a configuração do domínio back-end da plataforma Place Offers. O escopo abrange a modelagem das entidades `Usuario` e `Produto`, o enum `Categoria`, a camada de persistência com PostgreSQL (via Flyway migrations), e as operações CRUD expostas via REST API.
+Este documento descreve o design técnico para a configuração do domínio back-end da plataforma Daqui. O escopo abrange a modelagem das entidades `Usuario` e `Produto`, o enum `Categoria`, a camada de persistência com PostgreSQL (via Flyway migrations), e as operações CRUD expostas via REST API.
 
 A arquitetura segue o padrão de camadas (Controller → Service → Repository) com Spring Boot 3.x e Java 21+, conforme os padrões do projeto. O banco de dados é gerenciado exclusivamente por migrations Flyway, com Hibernate em modo `validate`.
 
@@ -50,8 +50,8 @@ graph TD
 ### Estrutura de Pacotes
 
 ```
-com.placeoffers
-├── PlaceOffersApplication.java
+com.daqui
+├── DaquiApplication.java
 ├── config/
 │   └── JpaAuditingConfig.java
 ├── common/
@@ -565,7 +565,7 @@ CREATE TABLE usuarios (
 
 CREATE INDEX idx_usuarios_ativo ON usuarios(ativo) WHERE ativo = TRUE;
 
-COMMENT ON TABLE usuarios IS 'Usuários/Lojas cadastrados na plataforma Place Offers';
+COMMENT ON TABLE usuarios IS 'Usuários/Lojas cadastrados na plataforma Daqui';
 ```
 
 #### V2__create_produtos_table.sql

@@ -2,11 +2,11 @@
 inclusion: always
 ---
 
-# Produto — PlaceOffers
+# Produto — daqui
 
 ## Propósito
 
-**PlaceOffers** é uma plataforma de ofertas para lojas composta por três partes:
+**daqui** é uma plataforma de ofertas para lojas composta por três partes:
 
 1. **Backend (API)** — serviço Spring Boot que gerencia o cadastro de lojas (usuários) e seus
    produtos, expondo a API REST em `/api/v1`.

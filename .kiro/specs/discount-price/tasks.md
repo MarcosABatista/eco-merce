@@ -2,7 +2,7 @@
 
 ## Overview
 
-Implementação do campo de preço com desconto (`preco_desconto`) no sistema Place Offers. O plano segue a ordem: banco de dados → entidade → DTOs → service (validação + cálculo) → front-end admin → front-end vitrine. Os dois front-ends podem ser implementados em paralelo após o back-end estar completo.
+Implementação do campo de preço com desconto (`preco_desconto`) no sistema Daqui. O plano segue a ordem: banco de dados → entidade → DTOs → service (validação + cálculo) → front-end admin → front-end vitrine. Os dois front-ends podem ser implementados em paralelo após o back-end estar completo.
 
 ## Tasks
 

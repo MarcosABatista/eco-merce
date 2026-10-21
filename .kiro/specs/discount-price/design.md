@@ -2,7 +2,7 @@
 
 ## Overview
 
-Esta feature adiciona suporte a preço com desconto na plataforma Place Offers. O fluxo envolve:
+Esta feature adiciona suporte a preço com desconto na plataforma Daqui. O fluxo envolve:
 1. Uma migration Flyway adiciona a coluna `preco_desconto` (NUMERIC(10,2), nullable) à tabela `produtos`
 2. O back-end valida, persiste e calcula o `percentualDesconto` de forma computada (não armazenado)
 3. Os front-ends (admin e vitrine) exibem preço original riscado, preço com desconto em destaque e badge "-X%"

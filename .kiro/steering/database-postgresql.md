@@ -356,17 +356,17 @@ LIMIT 20;
 
 ```sql
 -- Criar role para a aplicação
-CREATE ROLE placeoffers_app LOGIN PASSWORD 'strong_password_here';
-GRANT CONNECT ON DATABASE placeoffers TO placeoffers_app;
-GRANT USAGE ON SCHEMA public TO placeoffers_app;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO placeoffers_app;
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO placeoffers_app;
+CREATE ROLE daqui_app LOGIN PASSWORD 'strong_password_here';
+GRANT CONNECT ON DATABASE daqui TO daqui_app;
+GRANT USAGE ON SCHEMA public TO daqui_app;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO daqui_app;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO daqui_app;
 
 -- Permitir acesso a tabelas futuras
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
-    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO placeoffers_app;
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO daqui_app;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
-    GRANT USAGE, SELECT ON SEQUENCES TO placeoffers_app;
+    GRANT USAGE, SELECT ON SEQUENCES TO daqui_app;
 ```
 
 ## Modelo Inicial Sugerido

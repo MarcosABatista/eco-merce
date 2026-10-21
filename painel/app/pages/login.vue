@@ -55,7 +55,7 @@ async function aoSubmeter(_evento: FormSubmitEvent<{ email: string, senha: strin
         <div class="flex flex-col items-center gap-2 text-center">
           <UIcon name="i-lucide-store" class="size-8 text-primary" aria-hidden="true" />
           <h1 class="text-xl font-bold text-highlighted">
-            Painel PlaceOffers
+            Painel daqui
           </h1>
           <p class="text-sm text-muted">
             Acesse para gerenciar sua loja e produtos.

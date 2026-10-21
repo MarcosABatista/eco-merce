@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Este documento define os requisitos para a criação da estrutura inicial do domínio back-end da plataforma Place Offers — um sistema de gerenciamento de ofertas para lojas. O escopo cobre a modelagem das entidades Usuario e Produto, o enum Categoria, a configuração de conexão com banco de dados PostgreSQL local, e as operações CRUD básicas para ambas as entidades.
+Este documento define os requisitos para a criação da estrutura inicial do domínio back-end da plataforma Daqui — um sistema de gerenciamento de ofertas para lojas. O escopo cobre a modelagem das entidades Usuario e Produto, o enum Categoria, a configuração de conexão com banco de dados PostgreSQL local, e as operações CRUD básicas para ambas as entidades.
 
 ## Glossary
 
-- **Sistema**: A aplicação back-end Spring Boot da plataforma Place Offers
+- **Sistema**: A aplicação back-end Spring Boot da plataforma Daqui
 - **Usuario**: Entidade que representa um usuário/loja cadastrado na plataforma
 - **Produto**: Entidade que representa um produto/oferta vinculado a um Usuario
 - **Categoria**: Enumeração que classifica os produtos em tipos predefinidos
@@ -65,7 +65,7 @@ Este documento define os requisitos para a criação da estrutura inicial do dom
 
 #### Critérios de Aceitação
 
-1. WHILE o perfil de desenvolvimento estiver ativo, THE Sistema SHALL configurar a conexão com PostgreSQL usando a URL jdbc:postgresql://localhost:5432/placeoffers, username postgres e password 123Mudar
+1. WHILE o perfil de desenvolvimento estiver ativo, THE Sistema SHALL configurar a conexão com PostgreSQL usando a URL jdbc:postgresql://localhost:5432/daqui, username postgres e password 123Mudar
 2. THE Sistema SHALL usar Flyway para gerenciamento de migrations com arquivos localizados em classpath:db/migration
 3. THE Sistema SHALL configurar o Hibernate com ddl-auto definido como validate para garantir que o schema seja gerenciado exclusivamente por migrations
 4. THE Sistema SHALL desabilitar a propriedade spring.jpa.open-in-view

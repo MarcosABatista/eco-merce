@@ -4,7 +4,7 @@
 // e páginas e permitir que os testes asseram contra constantes (steering testing §3/nomenclatura).
 
 // Marca exibida no cabeçalho fixo (RF-VIT-1).
-export const VITRINE_MARCA = 'PLACE OFFERS'
+export const VITRINE_MARCA = 'Daqui'
 
 // Placeholder da barra de busca (busca por nome do produto OU da loja).
 export const VITRINE_BUSCA_PLACEHOLDER = 'Buscar produtos ou lojas'

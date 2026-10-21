@@ -2,7 +2,7 @@
 
 ## Overview
 
-Esta feature implementa a Página de Detalhes do Produto (estilo Mercado Livre) e o Botão de Contato via WhatsApp no projeto PlaceOffers. A funcionalidade é 100% frontend — não requer alterações no backend, pois o endpoint `GET /api/v1/produtos/{id}` já existe e retorna todos os campos necessários (`nome`, `descricao`, `preco`, `categoria`, `urlImagem`, `nomeLoja`, `telefone`).
+Esta feature implementa a Página de Detalhes do Produto (estilo Mercado Livre) e o Botão de Contato via WhatsApp no projeto daqui. A funcionalidade é 100% frontend — não requer alterações no backend, pois o endpoint `GET /api/v1/produtos/{id}` já existe e retorna todos os campos necessários (`nome`, `descricao`, `preco`, `categoria`, `urlImagem`, `nomeLoja`, `telefone`).
 
 A implementação envolve:
 1. Uma nova view `ProdutoDetailView.vue` com layout responsivo two-column (estilo Mercado Livre)
@@ -47,7 +47,7 @@ sequenceDiagram
     participant H as HomeView
     participant R as Vue Router
     participant PD as ProdutoDetailView
-    participant API as PlaceOffers API
+    participant API as daqui API
     participant WA as WhatsApp
 
     V->>H: Clica no Card ou "Ver Oferta"

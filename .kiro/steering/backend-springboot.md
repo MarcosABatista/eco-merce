@@ -14,8 +14,8 @@
 Seguir organização por domínio (domain-driven) conforme recomendado pela documentação oficial do Spring Boot:
 
 ```
-com.placeoffers
-├── PlaceOffersApplication.java
+com.daqui
+├── DaquiApplication.java
 ├── config/                    # Configurações globais (Security, CORS, etc.)
 ├── common/                    # Classes utilitárias compartilhadas
 │   ├── exception/             # Exceções customizadas e handlers globais
@@ -260,7 +260,7 @@ public class GlobalExceptionHandler {
 ```yaml
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:placeoffers}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:daqui}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
   jpa:

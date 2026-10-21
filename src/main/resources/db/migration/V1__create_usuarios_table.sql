@@ -18,4 +18,4 @@ CREATE TABLE usuarios (
 
 CREATE INDEX idx_usuarios_ativo ON usuarios(ativo) WHERE ativo = TRUE;
 
-COMMENT ON TABLE usuarios IS 'Usuários/Lojas cadastrados na plataforma Place Offers';
+COMMENT ON TABLE usuarios IS 'Usuários/Lojas cadastrados na plataforma Daqui';

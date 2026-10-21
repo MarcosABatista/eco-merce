@@ -2,7 +2,7 @@
 
 ## Overview
 
-O Marketplace Vitrine é uma aplicação Vue.js 3 pública e somente leitura, completamente desacoplada do projeto PlaceOffers existente. Ela consome a API REST do backend (`/api/v1/produtos`) para exibir produtos ativos a visitantes não autenticados.
+O Marketplace Vitrine é uma aplicação Vue.js 3 pública e somente leitura, completamente desacoplada do projeto daqui existente. Ela consome a API REST do backend (`/api/v1/produtos`) para exibir produtos ativos a visitantes não autenticados.
 
 A aplicação será construída como um projeto standalone em seu próprio diretório raiz (`vitrine/`), com stack Vue.js 3 + TypeScript + Vite + Pinia + Vue Router + Axios. O design prioriza performance de carregamento, responsividade, acessibilidade (WCAG AA) e resiliência a falhas de rede.
 
@@ -31,7 +31,7 @@ graph TD
         AxiosInstance["Axios Instance<br/>(api.ts)"]
     end
 
-    subgraph Backend["PlaceOffers Backend (Spring Boot)"]
+    subgraph Backend["daqui Backend (Spring Boot)"]
         API["GET /api/v1/produtos<br/>GET /api/v1/produtos/{id}"]
         DB[(PostgreSQL)]
     end
@@ -51,7 +51,7 @@ sequenceDiagram
     participant V as Visitante
     participant App as Vitrine SPA
     participant Store as Pinia Store
-    participant API as PlaceOffers API
+    participant API as daqui API
 
     V->>App: Acessa a página inicial
     App->>Store: fetchProducts(page=0, size=20)
@@ -131,7 +131,7 @@ vitrine/
 ### Componentes Principais
 
 #### AppHeader.vue
-- Logo "PLACE OFFERS" à esquerda
+- Logo "Daqui" à esquerda
 - Barra de busca centralizada com input + botão de busca
 - Position: fixed (sticky top)
 - Emite evento `search` com o termo digitado

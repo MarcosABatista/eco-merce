@@ -2,7 +2,7 @@
 
 ## Overview
 
-Implementação de uma aplicação Vue.js 3 pública e somente leitura (vitrine de marketplace) em um diretório standalone `vitrine/`. A aplicação consome a API REST do PlaceOffers para exibir produtos ativos a visitantes não autenticados, com busca client-side, filtro por categoria via API, paginação "carregar mais", e design responsivo com acessibilidade WCAG AA.
+Implementação de uma aplicação Vue.js 3 pública e somente leitura (vitrine de marketplace) em um diretório standalone `vitrine/`. A aplicação consome a API REST do daqui para exibir produtos ativos a visitantes não autenticados, com busca client-side, filtro por categoria via API, paginação "carregar mais", e design responsivo com acessibilidade WCAG AA.
 
 ## Tasks
 
@@ -20,7 +20,7 @@ Implementação de uma aplicação Vue.js 3 pública e somente leitura (vitrine 
   - [x] 1.2 Define TypeScript interfaces and types
     - Create `src/types/produto.ts` with `Produto` interface and `Categoria` type
     - Create `src/types/api.ts` with `PageResponse<T>` interface
-    - Ensure types match the PlaceOffers API contract (id, nome, descricao, preco, categoria, urlImagem, ativo, nomeLoja, telefone, createdAt, updatedAt)
+    - Ensure types match the daqui API contract (id, nome, descricao, preco, categoria, urlImagem, ativo, nomeLoja, telefone, createdAt, updatedAt)
     - _Requirements: 5.3, 6.1, 6.3, 6.4_
 
   - [x] 1.3 Create Axios instance and product service layer
@@ -140,7 +140,7 @@ Implementação de uma aplicação Vue.js 3 pública e somente leitura (vitrine 
 - [x] 6. Implement home page sections
   - [x] 6.1 Implement AppHeader component
     - Create `src/components/layout/AppHeader.vue`
-    - Display "PLACE OFFERS" logo on the left
+    - Display "Daqui" logo on the left
     - Display search bar (input + search button) centered
     - Position: fixed at top of viewport (sticky header)
     - Emit `search` event with the typed term on Enter or button click
@@ -213,7 +213,7 @@ Implementação de uma aplicação Vue.js 3 pública e somente leitura (vitrine 
 - Property tests validate universal correctness properties from the design document using fast-check with minimum 100 iterations
 - Unit tests validate specific examples and edge cases
 - The Vitrine is strictly read-only: only GET requests, no auth tokens, no mutation forms or routes
-- All code lives in `vitrine/` directory, completely independent from the PlaceOffers project
+- All code lives in `vitrine/` directory, completely independent from the daqui project
 
 ## Task Dependency Graph
 

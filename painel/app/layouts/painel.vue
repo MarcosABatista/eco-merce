@@ -40,7 +40,7 @@ async function sair() {
           data-testid="painel-marca"
         >
           <UIcon name="i-lucide-store" class="size-5" aria-hidden="true" />
-          <span>PlaceOffers</span>
+          <span>daqui</span>
         </NuxtLink>
 
         <div class="flex items-center gap-3">

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Módulo de vagas de emprego para a plataforma Place Offers. Permite que usuários cadastrados publiquem vagas de emprego vinculadas ao seu perfil, com operações completas de CRUD seguindo o padrão soft delete já estabelecido no projeto. O módulo segue a mesma arquitetura domain-package do módulo `produto`.
+Módulo de vagas de emprego para a plataforma Daqui. Permite que usuários cadastrados publiquem vagas de emprego vinculadas ao seu perfil, com operações completas de CRUD seguindo o padrão soft delete já estabelecido no projeto. O módulo segue a mesma arquitetura domain-package do módulo `produto`.
 
 ## Architecture
 

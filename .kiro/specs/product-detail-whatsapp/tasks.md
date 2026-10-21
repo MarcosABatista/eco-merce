@@ -2,7 +2,7 @@
 
 ## Overview
 
-This plan implements the Product Detail Page (Mercado Livre style) and WhatsApp Contact Button for the PlaceOffers frontend. The implementation is 100% frontend — no backend changes needed. We start with the reusable composable and components, then build the detail page view, update the router, and finally modify the HomeView to integrate WhatsApp buttons and clickable cards.
+This plan implements the Product Detail Page (Mercado Livre style) and WhatsApp Contact Button for the daqui frontend. The implementation is 100% frontend — no backend changes needed. We start with the reusable composable and components, then build the detail page view, update the router, and finally modify the HomeView to integrate WhatsApp buttons and clickable cards.
 
 ## Tasks
 

@@ -47,6 +47,16 @@ const termo = defineModel<string>({ default: '' })
         />
       </div>
 
+      <!-- Botão Vagas: navega para a tela de vagas disponíveis. -->
+      <NuxtLink
+        to="/vagas"
+        class="flex shrink-0 items-center gap-2 px-3 py-1.5 rounded-full bg-inverted text-primary font-medium transition hover:bg-inverted/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted"
+        data-testid="cabecalho-vagas"
+      >
+        <UIcon name="i-lucide-briefcase" class="size-4" aria-hidden="true" />
+        <span class="text-sm sm:text-base">Vagas</span>
+      </NuxtLink>
+
       <!-- Ícone decorativo (carrinho) — a negociação é externa, mas reforça a estética marketplace. -->
       <UIcon
         name="i-lucide-shopping-cart"

@@ -11,10 +11,10 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.placeoffers</groupId>
-    <artifactId>place-offers</artifactId>
+    <groupId>com.daqui</groupId>
+    <artifactId>daqui</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>place-offers</name>
+    <name>daqui</name>
     <description>Plataforma de gerenciamento de ofertas para lojas</description>
 
     <properties>
@@ -102,13 +102,26 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.placeoffers.PlaceOffersApplication</mainClass>
+                    <mainClass>com.daqui.DaquiApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Flyway: permite rodar flyway:info / flyway:repair pela linha de comando.
+                 Reutiliza o driver PostgreSQL já presente nas dependências do projeto. -->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>10.10.0</version>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/placeoffers</url>
+                    <user>postgres</user>
+                    <password>123Mudar</password>
                 </configuration>
             </plugin>
         </plugins>
